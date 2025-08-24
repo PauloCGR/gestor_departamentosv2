@@ -9,7 +9,7 @@ export default function DepartmentCard({ department, onEdit, onDelete }) {
           {department.nombre}
         </h2>
         <p className="text-gray-600">Domicilio: {department.domicilio}</p>
-        <p className="text-gray-600">Teléfono: {department.telefono}</p>
+        <p className="text-gray-600">Teléfono: {department.numeroContacto}</p>
         <p className="text-gray-600">Correo: {department.correo}</p>
         {department.extra && (
           <p className="text-gray-500 italic">Extra: {department.extra}</p>

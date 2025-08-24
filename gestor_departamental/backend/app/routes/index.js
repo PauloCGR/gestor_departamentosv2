@@ -1,11 +1,11 @@
 import express from 'express'
-import employedRoutes from './employeds.js' // Importación estática
+import employedRoutes from './employeds.js'
+import departamentRoutes from './departaments.js'
 
 const router = express.Router()
 
-// Cargar rutas manualmente
 router.use('/employeds', employedRoutes)
-// Agrega aquí otras rutas que tengas
+router.use('/departaments', departamentRoutes)
 
 router.get('*', (req, res) => {
     res.status(404)

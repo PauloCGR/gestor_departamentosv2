@@ -1,40 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/forms/Navbar";
 import Footer from "../components/forms/Footer";
 import EmployeeCard from "../components/employees/EmployeeCard";
 import SearchBar from "../components/forms/SearchBar";
 
 export default function EmployeeList() {
-  const [employees, setEmployees] = useState([
-    {
-      id: 1,
-      name: "Juan Pérez",
-      code: "EMP001",
-      curp: "PEPJ900101HDFRRL01",
-      salary: 500,
-      salaryType: "día",
-      department: "Recursos Humanos",
-      vacationDays: 12,
-    },
-    {
-      id: 2,
-      name: "María López",
-      code: "EMP002",
-      curp: "LOPM850202MDFRRL02",
-      salary: 100,
-      salaryType: "hora",
-      department: "Finanzas",
-      vacationDays: 10,
-    },
-  ]);
+  const [employees, setEmployees] = useState([]);
+
+  // 🔹 Cargar empleados al iniciar
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/api/1.0/employeds");
+        if (!response.ok) {
+          throw new Error("Error al obtener empleados");
+        }
+        const data = await response.json();
+
+        // 👇 Aquí el fix: tomar la propiedad `data` que contiene el array
+        setEmployees(data.data || []);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchEmployees();
+  }, []);
 
   const handleEdit = (employee) => {
     console.log("Editar:", employee);
   };
 
-  const handleDelete = (employee) => {
-    if (window.confirm(`¿Eliminar a ${employee.name}?`)) {
-      setEmployees(employees.filter((e) => e.id !== employee.id));
+  const handleDelete = async (employee) => {
+    if (window.confirm(`¿Eliminar a ${employee.nombre}?`)) {
+      try {
+        const response = await fetch(
+          `http://localhost:4000/api/1.0/employeds/${employee._id}`,
+          { method: "DELETE" }
+        );
+
+        if (!response.ok) throw new Error("Error al eliminar");
+
+        // 🔹 Quitar del state
+        setEmployees((prev) => prev.filter((e) => e._id !== employee._id));
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -49,14 +60,18 @@ export default function EmployeeList() {
         <div className="w-full max-w-4xl">
           <SearchBar />
 
-          {employees.map((emp) => (
-            <EmployeeCard
-              key={emp.id}
-              employee={emp}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-            />
-          ))}
+          {employees.length === 0 ? (
+            <p className="text-center text-gray-600">No hay empleados registrados.</p>
+          ) : (
+            employees.map((emp) => (
+              <EmployeeCard
+                key={emp._id}
+                employee={emp}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            ))
+          )}
         </div>
       </div>
       <Footer />

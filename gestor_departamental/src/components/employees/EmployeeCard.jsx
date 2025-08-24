@@ -6,28 +6,28 @@ export default function EmployeeCard({ employee, onEdit, onDelete }) {
     <div className="bg-white shadow-lg rounded-2xl p-6 flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 hover:shadow-2xl transition">
       <div className="flex flex-col sm:flex-row sm:space-x-6 mb-4 sm:mb-0">
         <div>
-          <p className="text-gray-800 font-semibold">{employee.name}</p>
+          <p className="text-gray-800 font-semibold">{employee.nombre}</p>
           <p className="text-gray-500 text-sm">{employee.curp}</p>
         </div>
         <div>
           <p className="text-gray-600">
-            Código: <span className="font-medium">{employee.code}</span>
+            Código: <span className="font-medium">{employee.numSeguro}</span>
           </p>
           <p className="text-gray-600">
             Sueldo:{" "}
             <span className="font-medium">
-              {employee.salary} ({employee.salaryType})
+              {employee.sueldo} ({employee.tipoSueldo})
             </span>
           </p>
         </div>
         <div>
           <p className="text-gray-600">
             Departamento:{" "}
-            <span className="font-medium">{employee.department}</span>
+            <span className="font-medium">{employee.departamento}</span>
           </p>
           <p className="text-gray-600">
             Vacaciones:{" "}
-            <span className="font-medium">{employee.vacationDays} días</span>
+            <span className="font-medium">{employee.diasVacaciones} días</span>
           </p>
         </div>
       </div>

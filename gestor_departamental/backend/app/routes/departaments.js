@@ -1,5 +1,5 @@
 import express from "express";
-import controller from "../controllers/employeds.js";
+import controller from "../controllers/departaments.js";
 import checkOrigin from "../middleware/origin.js";
 
 const router = express.Router();

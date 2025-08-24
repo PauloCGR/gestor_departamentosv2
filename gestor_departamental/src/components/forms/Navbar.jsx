@@ -5,6 +5,7 @@ import {
   FaSignOutAlt,
   FaUserCircle,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -31,20 +32,21 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:flex flex-1 justify-center space-x-8 items-center">
-            <a
-              href="#empleados"
+            <Link
+              to="/empleados"
               className="relative group px-3 py-2 flex items-center transition"
             >
               <FaUsers className="mr-2" /> Listado de Empleados
               <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all group-hover:w-full"></span>
-            </a>
-            <a
-              href="#departamentos"
+            </Link>
+
+            <Link
+              to="/departamentos"
               className="relative group px-3 py-2 flex items-center transition"
             >
               <FaBuilding className="mr-2" /> Listado de Departamentos
               <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all group-hover:w-full"></span>
-            </a>
+            </Link>
           </div>
 
           {/* Botón Cerrar Sesión al final */}

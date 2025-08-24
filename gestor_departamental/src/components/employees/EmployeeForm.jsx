@@ -6,14 +6,15 @@ import SelectBox from "../forms/SelectBox";
 
 export default function EmployeeForm({ onSubmit }) {
   const [formData, setFormData] = useState({
-    nombre: "",
-    codigoSeguro: "",
-    curp: "",
-    sueldo: "",
-    tipoSueldo: "",
-    departamento: "",
-    vacaciones: "",
-  });
+  nombre: "",
+  numSeguro: "",
+  curp: "",
+  sueldo: "",
+  tipoSueldo: "",
+  departamento: "",
+  diasVacaciones: "",
+});
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,8 +39,8 @@ export default function EmployeeForm({ onSubmit }) {
       />
       <InputText
         label="Código Seguro"
-        name="codigoSeguro"
-        value={formData.codigoSeguro}
+        name="numSeguro"
+        value={formData.numSeguro}
         onChange={handleChange}
       />
       <InputText
@@ -73,17 +74,17 @@ export default function EmployeeForm({ onSubmit }) {
         value={formData.departamento}
         onChange={handleChange}
         options={[
-          { label: "Recursos Humanos", value: "rh" },
-          { label: "Ventas", value: "ventas" },
-          { label: "Producción", value: "produccion" },
+          { label: "Recursos Humanos", value: "Recursos Humanos" },
+          { label: "Ventas", value: "Ventas" },
+          { label: "Producción", value: "Producción" },
         ]}
       />
 
       <InputText
         label="Días de vacaciones"
-        name="vacaciones"
+        name="diasVacaciones"
         type="number"
-        value={formData.vacaciones}
+        value={formData.diasVacaciones}
         onChange={handleChange}
       />
 

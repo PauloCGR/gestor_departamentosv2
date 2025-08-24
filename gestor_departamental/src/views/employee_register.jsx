@@ -4,16 +4,40 @@ import Footer from "../components/forms/Footer";
 import Swal from "sweetalert2";
 
 export default function EmployeeRegister() {
-  const handleRegister = (data) => {
-    console.log("Empleado registrado:", data);
+  const handleRegister = async (data) => {
+    try {
+      const response = await fetch("http://localhost:4000/api/1.0/employeds", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    Swal.fire({
-      title: "Registro exitoso",
-      text: `Empleado ${data.nombre} guardado correctamente`,
-      icon: "success",
-      confirmButtonText: "Aceptar",
-      confirmButtonColor: "#2563eb",
-    });
+      if (!response.ok) {
+        throw new Error("Error al registrar empleado");
+      }
+
+      const result = await response.json();
+      console.log("Respuesta del servidor:", result);
+
+      Swal.fire({
+        title: "Registro exitoso",
+        text: `Empleado ${data.nombre} guardado correctamente`,
+        icon: "success",
+        confirmButtonText: "Aceptar",
+        confirmButtonColor: "#2563eb",
+      });
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "Error",
+        text: "No se pudo registrar el empleado",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+        confirmButtonColor: "#dc2626",
+      });
+    }
   };
 
   return (

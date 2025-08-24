@@ -1,5 +1,5 @@
 import { httpError } from '../helpers/handleError.js';
-import employedModel from '../models/employed.js'; // Corregida la ruta
+import employedModel from '../models/employed.js';
 
 const getItems = async (req, res) => {
     try {
@@ -25,9 +25,9 @@ const getItem = async (req, res) => {
 
 const createItem = async (req, res) => {
     try {
-        const { name, age, email } = req.body;
+        const { nombre, numSeguro, curp, sueldo, tipoSueldo, departamento, diasVacaciones } = req.body;
         const resDetail = await employedModel.create({
-            name, age, email
+            nombre, numSeguro, curp, sueldo, tipoSueldo, departamento, diasVacaciones
         });
         res.status(201).send({ data: resDetail });
     } catch (e) {
@@ -38,10 +38,10 @@ const createItem = async (req, res) => {
 const updateItem = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, age, email } = req.body;
+        const { nombre, numSeguro, curp, sueldo, tipoSueldo, departamento, diasVacaciones } = req.body;
         const updatedItem = await employedModel.findByIdAndUpdate(
             id,
-            { name, age, email },
+            { nombre, numSeguro, curp, sueldo, tipoSueldo, departamento, diasVacaciones },
             { new: true } // Devuelve el documento actualizado
         );
         if (!updatedItem) {
