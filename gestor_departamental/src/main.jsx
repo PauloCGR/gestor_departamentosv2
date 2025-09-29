@@ -19,7 +19,10 @@ createRoot(document.getElementById("root")).render(
         <Route path="/empleados" element={<EmployeeList />} />
         <Route path="/empleados/registrar" element={<EmployeeRegister />} />
         <Route path="/departamentos" element={<DepartmentList />} />
-        <Route path="/departamentos/registrar" element={<DepartmentRegister />} />
+        <Route
+          path="/departamentos/registrar"
+          element={<DepartmentRegister />}
+        />
       </Routes>
     </BrowserRouter>
   </StrictMode>
